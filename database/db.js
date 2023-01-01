@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import app from "../app.js";
+import mongoose from 'mongoose';
 
 const connectToDb = () => {
     mongoose.set('strictQuery', false);
@@ -9,6 +10,5 @@ const connectToDb = () => {
     });
 };
 
-module.exports = {
-    connectToDb
-};
+
+export default {connectToDb};

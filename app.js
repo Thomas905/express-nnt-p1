@@ -1,8 +1,9 @@
-const express = require('express');
-const cors = require('cors')
+import express from 'express';
+import cors from 'cors';
+import router from './router/router.js';
+import db from './database/db.js';
+
 const app = express();
-const router = require('./router/router');
-const db = require('./database/db');
 
 app.use(cors('*'));
 app.use(express.json());
@@ -12,5 +13,4 @@ app.use('/api', router);
 
 db.connectToDb();
 
-
-module.exports = app;
+export default app;

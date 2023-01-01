@@ -1,10 +1,27 @@
-const express = require('express');
-const router = express.Router();
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
+
 dotenv.config(process.cwd(), '.env');
 
-router.use('/test', function(req, res, next) {
-    res.send('Hello world de test');
+const router = express.Router();
+
+import { articles } from "../model/articles.js";
+
+router.get('/articles', function(req, res, next) {
+    articles.find({}, function(err, articles) {
+        if (err) {
+            console.log(err);
+            res.status(500).send
+        } else {
+            res.status(200).send(articles);
+        }
+    });
 });
 
-module.exports = router
+router.post('/article', function(req, res, next) {
+    const article = new articles(req.body);
+    console.log(article);
+     article.save();
+});
+
+export default router;
