@@ -8,6 +8,7 @@ const router = express.Router();
 import { articles } from "../model/articles.js";
 import { auteurs } from "../model/auteurs.js";
 import {categories} from "../model/categories.js";
+import {commentaires} from "../model/commentaires.js";
 
 // GET ALL ARTICLES
 router.get('/articles', function(req, res, next) {
@@ -79,6 +80,16 @@ router.get('/auteurs', function(req, res, next) {
             res.status(200).send(authors);
         }
     });
+});
+
+router.post('/article/:id/comment', function(req, res, next) {
+    const id = req.params.id;
+    const comment = req.body;
+    const newComment = new commentaires(comment);
+    newComment.articleId = id;
+    newComment.save()
+        .then(() => res.json('Commentaire ajouté!'))
+        .catch(err => res.status(400).json("Commentaire non crée, une erreur est survenue lors de la création"));
 });
 
 export default router;
