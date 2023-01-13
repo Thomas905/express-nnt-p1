@@ -24,8 +24,7 @@ const articlesSchema = mongoose.Schema({
         required: true,
     },
     tags: [{
-        type: String,
-        required: true,
+        libelle: String,
     }],
 }, {collection: 'articles'});
 
